@@ -7,16 +7,11 @@
     "routes": [{
         "src": "/(.*)",
         "dest": "/api/index.php"
-    },
-        {
-            "src": "/(css|js)/(.*)$",
-            "dest": "/api/assets.php?type=$1&file=$2"
-        }
-    ],
+    }    ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "wieniolaravel.vercel.app",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",

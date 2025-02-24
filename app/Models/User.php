@@ -44,5 +44,10 @@ class User extends Authenticatable
 {
     return $this->belongsToMany(\App\Models\Project::class);
 }
+public function isAdmin()
+{
+    return $this->is_admin; // Powinno działać poprawnie, jeśli `is_admin` jest booleanem
+}
 
 }
+

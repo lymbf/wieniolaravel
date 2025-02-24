@@ -27,17 +27,23 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
 {
     $request->authenticate();
-
     $request->session()->regenerate();
 
-    // Generujemy token dla zalogowanego użytkownika
-    $token = auth()->user()->createToken('project-access')->plainTextToken;
+    // Pobranie zalogowanego użytkownika
+    $user = auth()->user();
 
-    // Możesz zapisać token w sesji lub zwrócić jako część odpowiedzi, np. w JSON,
-    // jeżeli budujesz API. W tym przykładzie pozostawiamy redirect:
-    return redirect()->intended(RouteServiceProvider::HOME);
+    // Sprawdzenie liczby projektów użytkownika
+    if ($user->projects->count() > 1) {
+        // Jeśli użytkownik ma więcej niż jeden projekt – przekieruj do listy projektów
+        return redirect()->route('projects.index');
+    } elseif ($user->projects->count() === 1) {
+        // Jeśli użytkownik ma tylko jeden projekt – przekieruj do dashboardu tego projektu
+        return redirect()->route('projects.show', $user->projects->first()->id);
+    } else {
+        // Jeśli brak projektów, możesz przekierować do innego widoku (np. informującego o braku projektów)
+        return redirect()->route('dashboard.noproject');
+    }
 }
-
 
 
     /**

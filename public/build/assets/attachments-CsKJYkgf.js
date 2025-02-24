@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{fetch("/api/attachments").then(t=>t.json()).then(t=>{console.log("Attachments data:",t);const e=document.getElementById("attachments");e&&(t.length?e.innerHTML=t.map(n=>`<p>${n.original_name}</p>`).join(""):e.innerHTML="<p>Brak załączników</p>")}).catch(t=>console.error("Error fetching attachments:",t))});

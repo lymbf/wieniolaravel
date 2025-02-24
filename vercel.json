@@ -7,7 +7,12 @@
     "routes": [{
         "src": "/(.*)",
         "dest": "/api/index.php"
-    }],
+    },
+        {
+            "src": "/(css|js)/(.*)$",
+            "dest": "/api/assets.php?type=$1&file=$2"
+        }
+    ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
